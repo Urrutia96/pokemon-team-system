@@ -10,4 +10,8 @@ class Pokemon extends Model
     use HasFactory;
 
     protected $table = "pokemons";
+
+    protected $fillable = [
+        'name', 'types'
+    ];
 }
