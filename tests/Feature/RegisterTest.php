@@ -9,11 +9,8 @@ use Tests\TestCase;
 class RegisterTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    
+    /** @test */
     public function test_can_register()
     {
         $response = $this->postJson('/api/register', [
@@ -26,6 +23,7 @@ class RegisterTest extends TestCase
         $response->assertStatus(201);
     }
     
+    /** @test */
     public function test_invalid_data_to_register()
     {
         $response = $this->postJson('/api/register', [
