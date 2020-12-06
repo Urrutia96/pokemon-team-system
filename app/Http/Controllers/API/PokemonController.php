@@ -53,9 +53,8 @@ class PokemonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pokemon $pokemon)
     {
-        $pokemon = Pokemon::findOrFail($id);
         return $pokemon->update($request->only(['name','types']))
             ? new ResourcesPokemon($pokemon)
             : new Response(null, 500);
@@ -67,9 +66,9 @@ class PokemonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pokemon $pokemon)
     {
-        return Pokemon::findOrFail($id)->delete()
+        return $pokemon->delete()
             ? new Response(null, 202)
             : new Response(null, 500);
     }
