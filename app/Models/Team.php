@@ -14,4 +14,14 @@ class Team extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id' => 'integer',
+        'user_id' => 'integer'
+    ];
 }
