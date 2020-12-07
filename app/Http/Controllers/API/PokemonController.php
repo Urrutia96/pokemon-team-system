@@ -7,6 +7,7 @@ use App\Http\Requests\PokemonRequest;
 use App\Http\Resources\Pokemon as ResourcesPokemon;
 use App\Http\Resources\PokemonCollection;
 use App\Models\Pokemon;
+use App\Respositories\PokemonRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -17,9 +18,9 @@ class PokemonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, PokemonRepository $pokemonRepository)
     {
-        return new PokemonCollection(Pokemon::all());
+        return $pokemonRepository->show($request);
     }
 
     /**
@@ -41,9 +42,11 @@ class PokemonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pokemon $pokemon)
     {
-        //
+        return $pokemon
+            ? new ResourcesPokemon($pokemon)
+            : new Response(null, 422);
     }
 
     /**

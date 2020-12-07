@@ -55,26 +55,40 @@ class PokemonTest extends TestCase
     }
 
     /** @test */
-    // public function it_can_fetch_pokemon_by_types()
-    // {
-    // $pokemon = Pokemon::factory()->count(5);
-    // $response = $this->getJson("/api/pokemon/{$pokemon[2]->types}");
+    public function it_can_fetch_pokemon_by_types()
+    {
+        $pokemon = Pokemon::factory()->count(5)->create();
+        $response = $this->getJson("/api/pokemon?types={$pokemon[2]->types}");
 
-    // $response
-    //     ->assertStatus(200)
-    //     ->assertExactJson([
-    //         'data' => [
-    //             'id' => $pokemon[2]->id,
-    //             'name' => $pokemon[2]->name,
-    //             'types' => $pokemon[2]->types
-    //         ]
-    //     ]);
-    // }
+        $response
+            ->assertStatus(200)
+            ->assertExactJson([
+                'data' => [
+                    [
+                        'name' => $pokemon[2]->name,
+                        'types' => $pokemon[2]->types
+                    ]
+                ]
+            ]);
+    }
 
     /** @test */
-    // public function it_can_fetch_pokemon_by_name()
-    // {
-    // }
+    public function it_can_fetch_pokemon_by_name()
+    {
+        $pokemon = Pokemon::factory()->count(5)->create();
+        $response = $this->getJson("/api/pokemon?name={$pokemon[2]->name}");
+
+        $response
+            ->assertStatus(200)
+            ->assertExactJson([
+                'data' => [
+                    [
+                        'name' => $pokemon[2]->name,
+                        'types' => $pokemon[2]->types
+                    ]
+                ]
+            ]);
+    }
 
     /** @test */
     public function it_can_update_a_pokemon()
