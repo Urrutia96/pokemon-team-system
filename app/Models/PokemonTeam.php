@@ -10,6 +10,10 @@ class PokemonTeam extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'team_id', 'pokemon_id'
+    ];
+
     public function team() : BelongsTo
     {
         return $this->belongsTo('App\Models\Team');

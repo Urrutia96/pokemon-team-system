@@ -15,8 +15,8 @@ class CreatePokemonTeamsTable extends Migration
     {
         Schema::create('pokemon_teams', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('teams_id')->constrained('teams');
-            $table->foreignId('pokemons_id')->constrained('pokemons');
+            $table->foreignId('team_id')->constrained('teams');
+            $table->foreignId('pokemon_id')->constrained('pokemons');
             $table->timestamps();
         });
     }
